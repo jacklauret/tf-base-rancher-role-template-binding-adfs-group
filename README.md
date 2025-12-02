@@ -1,30 +1,31 @@
+
 # tf-base-rancher-role-template-binding-adfs-group
 
-Dieses Terraform-Modul erstellt Rancher Projekt-Rollenbindungen für ADFS-Gruppen.
+This Terraform module creates Rancher project role bindings for ADFS groups.
 
-## Übersicht
-Das Modul bindet ADFS-Gruppen als "Owner", "Member" oder "Readonly" an ein Rancher-Projekt in einem Cluster. Die Gruppen erhalten entsprechende Rollen im Projekt.
+## Overview
+The module binds ADFS groups as "Owner", "Member" or "Readonly" to a Rancher project in a cluster. The groups receive the corresponding roles in the project.
 
-## Ressourcen
-- `rancher2_project_role_template_binding` für Owner, Member und Readonly Gruppen
-- Datenquellen für Cluster und Projekt
+## Resources
+- `rancher2_project_role_template_binding` for owner, member and readonly groups
+- Data sources for cluster and project
 
-## Eingabevariablen
-| Name                | Typ     | Beschreibung                                      | Erforderlich | Default |
-|---------------------|---------|---------------------------------------------------|-------------|---------|
-| cluster_api_url     | string  | Die Rancher API URL                               | Ja          | -       |
-| rancher_access_key  | string  | Rancher Access Key (sensitiv)                     | Ja          | -       |
-| rancher_secret_key  | string  | Rancher Secret Key (sensitiv)                     | Ja          | -       |
-| target_cluster_name | string  | Name des Ziel-Clusters                            | Ja          | -       |
-| project_name        | string  | Name des Projekts                                 | Ja          | -       |
-| owner_group_id      | string  | ADFS-Gruppen-ID für Owner                         | Nein        | ""      |
-| owner_group_name    | string  | ADFS-Gruppen-Name für Owner                       | Nein        | ""      |
-| member_group_id     | string  | ADFS-Gruppen-ID für Member                        | Nein        | ""      |
-| member_group_name   | string  | ADFS-Gruppen-Name für Member                      | Nein        | ""      |
-| readonly_group_id   | string  | ADFS-Gruppen-ID für Readonly                      | Nein        | ""      |
-| readonly_group_name | string  | ADFS-Gruppen-Name für Readonly                    | Nein        | ""      |
+## Input Variables
+| Name                | Type    | Description                                      | Required    | Default |
+|---------------------|---------|--------------------------------------------------|-------------|---------|
+| cluster_api_url     | string  | Rancher API URL                                  | Yes         | -       |
+| rancher_access_key  | string  | Rancher access key (sensitive)                   | Yes         | -       |
+| rancher_secret_key  | string  | Rancher secret key (sensitive)                   | Yes         | -       |
+| target_cluster_name | string  | Name of the target cluster                       | Yes         | -       |
+| project_name        | string  | Name of the project                              | Yes         | -       |
+| owner_group_id      | string  | ADFS group ID for owner                          | No          | ""      |
+| owner_group_name    | string  | ADFS group name for owner                        | No          | ""      |
+| member_group_id     | string  | ADFS group ID for member                         | No          | ""      |
+| member_group_name   | string  | ADFS group name for member                       | No          | ""      |
+| readonly_group_id   | string  | ADFS group ID for readonly                       | No          | ""      |
+| readonly_group_name | string  | ADFS group name for readonly                     | No          | ""      |
 
-## Beispiel
+## Example
 ```hcl
 module "rancher_role_binding" {
   source              = "./tf-base-rancher-role-template-binding-adfs-group"
@@ -59,9 +60,9 @@ provider "rancher2" {
 }
 ```
 
-## Hinweise
-- Die Gruppenvariablen können leer bleiben, wenn keine Bindung für die jeweilige Rolle benötigt wird.
-- Die Namen der Gruppen werden für die Bindung verwendet und sollten eindeutig sein.
+## Notes
+- The group variables can be left empty if no binding is needed for the respective role.
+- The names of the groups are used for the binding and should be unique.
 
-## Autor
-Dieses Modul wurde von jacklauret erstellt.
+## Author
+This module was created by jacklauret.
